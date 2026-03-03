@@ -117,4 +117,4 @@ Drop it in `modules/` → restart → it works.
 AGPL-3.0 — Free to use, modify, distribute. Must keep open source.
 
 ---
-**Built by [synavy](https://github.com/synavy)**
+**Built by [sadidft](https://github.com/sadidft)**
