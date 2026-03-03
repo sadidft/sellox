@@ -1,0 +1,39 @@
+<h2 class="text-2xl font-bold mb-6">Orders</h2>
+
+<div class="bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden">
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="border-b border-zinc-800 text-zinc-400 text-left">
+        <th class="py-3 px-4 font-medium">Order</th>
+        <th class="py-3 px-4 font-medium">Email</th>
+        <th class="py-3 px-4 font-medium">Amount</th>
+        <th class="py-3 px-4 font-medium">Method</th>
+        <th class="py-3 px-4 font-medium">Status</th>
+        <th class="py-3 px-4 font-medium">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.forEach(function(o) { %>
+        <tr class="border-b border-zinc-800/50 hover:bg-zinc-800/30 cursor-pointer"
+            onclick="window.location='/admin/orders/<%= o.id %>'">
+          <td class="py-3 px-4 font-mono text-xs"><%= o.publicId %></td>
+          <td class="py-3 px-4"><%= o.email %></td>
+          <td class="py-3 px-4"><%= store.currencySymbol %><%= (o.totalAmount / 100).toFixed(2) %></td>
+          <td class="py-3 px-4"><%= o.paymentMethod %></td>
+          <td class="py-3 px-4">
+            <span class="px-2 py-1 rounded-full text-xs
+              <%= o.status === 'completed' ? 'bg-green-500/10 text-green-400' :
+                  o.status === 'pending' ? 'bg-yellow-500/10 text-yellow-400' :
+                  'bg-zinc-700 text-zinc-400' %>">
+              <%= o.status %>
+            </span>
+          </td>
+          <td class="py-3 px-4 text-zinc-500 text-xs"><%= new Date(o.createdAt).toLocaleString() %></td>
+        </tr>
+      <% }) %>
+      <% if (orders.length === 0) { %>
+        <tr><td colspan="6" class="py-12 text-center text-zinc-500">No orders yet</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

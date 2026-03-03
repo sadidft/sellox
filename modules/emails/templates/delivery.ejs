@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <h2>🎁 Your Order is Ready!</h2>
+  <p>Order <strong><%= order.publicId %></strong> has been completed.</p>
+  <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin: 20px 0;">
+    <h3 style="margin-top: 0;">Your Product:</h3>
+    <pre style="background: #18181b; color: #86efac; padding: 12px; border-radius: 6px; font-size: 14px; white-space: pre-wrap;"><%= deliveredContent %></pre>
+  </div>
+  <p>You can also view your order at: <a href="<%= storeUrl %>/order/<%= order.publicId %>">Check Order</a></p>
+  <p style="color: #888; font-size: 12px; margin-top: 30px;">Powered by Sellox</p>
+</body>
+</html>

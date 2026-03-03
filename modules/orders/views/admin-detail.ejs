@@ -1,0 +1,31 @@
+<div class="flex items-center justify-between mb-6">
+  <h2 class="text-2xl font-bold">Order <%= order.publicId %></h2>
+  <a href="/admin/orders" class="px-4 py-2 bg-zinc-800 rounded-lg text-sm hover:bg-zinc-700">← Back</a>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <div class="bg-zinc-900 rounded-xl border border-zinc-800 p-6 space-y-3">
+    <h3 class="font-semibold mb-2">Details</h3>
+    <div class="flex justify-between text-sm"><span class="text-zinc-400">Status</span>
+      <span class="px-2 py-1 rounded-full text-xs
+        <%= order.status === 'completed' ? 'bg-green-500/10 text-green-400' :
+            order.status === 'pending' ? 'bg-yellow-500/10 text-yellow-400' : 'bg-zinc-700 text-zinc-400' %>">
+        <%= order.status %>
+      </span>
+    </div>
+    <div class="flex justify-between text-sm"><span class="text-zinc-400">Email</span><span><%= order.email %></span></div>
+    <div class="flex justify-between text-sm"><span class="text-zinc-400">Product</span><span><%= product ? product.title : order.productId %></span></div>
+    <div class="flex justify-between text-sm"><span class="text-zinc-400">Quantity</span><span><%= order.quantity %></span></div>
+    <div class="flex justify-between text-sm"><span class="text-zinc-400">Total</span><span class="font-bold"><%= store.currencySymbol %><%= (order.totalAmount / 100).toFixed(2) %></span></div>
+    <div class="flex justify-between text-sm"><span class="text-zinc-400">Payment</span><span><%= order.paymentMethod %></span></div>
+    <div class="flex justify-between text-sm"><span class="text-zinc-400">Date</span><span><%= new Date(order.createdAt).toLocaleString() %></span></div>
+    <div class="flex justify-between text-sm"><span class="text-zinc-400">IP</span><span class="text-zinc-500"><%= order.ipAddress %></span></div>
+  </div>
+
+  <% if (order.deliveredContent) { %>
+    <div class="bg-zinc-900 rounded-xl border border-zinc-800 p-6">
+      <h3 class="font-semibold mb-2">Delivered Content</h3>
+      <pre class="bg-zinc-800 p-4 rounded-lg text-sm font-mono text-green-400 whitespace-pre-wrap overflow-auto max-h-64"><%= order.deliveredContent %></pre>
+    </div>
+  <% } %>
+</div>

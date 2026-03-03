@@ -1,0 +1,93 @@
+<div class="max-w-lg mx-auto">
+  <h2 class="text-2xl font-bold mb-6 text-center">Complete Payment</h2>
+
+  <!-- Order Summary -->
+  <div class="bg-zinc-900 rounded-xl border border-zinc-800 p-6 mb-6">
+    <div class="flex justify-between items-start mb-4">
+      <div>
+        <h3 class="font-semibold"><%= product.title %></h3>
+        <p class="text-zinc-500 text-sm">Qty: <%= order.quantity %></p>
+      </div>
+      <span class="text-xl font-bold text-primary">
+        <%= store.currencySymbol %><%= (order.totalAmount / 100).toFixed(2) %>
+      </span>
+    </div>
+    <div class="text-sm text-zinc-400 space-y-1">
+      <div class="flex justify-between"><span>Order ID</span><span class="font-mono text-white"><%= order.publicId %></span></div>
+      <div class="flex justify-between"><span>Email</span><span><%= order.email %></span></div>
+    </div>
+  </div>
+
+  <!-- Payment Instructions -->
+  <% if (paymentInfo.type === 'manual') { %>
+    <div class="bg-zinc-900 rounded-xl border border-zinc-800 p-6 mb-6">
+      <h3 class="font-semibold mb-4 flex items-center gap-2">🏦 Bank Transfer Details</h3>
+
+      <div class="space-y-3 text-sm">
+        <div class="flex justify-between p-3 bg-zinc-800 rounded-lg">
+          <span class="text-zinc-400">Bank</span>
+          <span class="font-semibold"><%= paymentInfo.bankName %></span>
+        </div>
+        <div class="flex justify-between p-3 bg-zinc-800 rounded-lg">
+          <span class="text-zinc-400">Account Number</span>
+          <span class="font-mono font-semibold select-all"><%= paymentInfo.accountNumber %></span>
+        </div>
+        <div class="flex justify-between p-3 bg-zinc-800 rounded-lg">
+          <span class="text-zinc-400">Account Name</span>
+          <span class="font-semibold"><%= paymentInfo.accountName %></span>
+        </div>
+        <div class="flex justify-between p-3 bg-primary/10 border border-primary/30 rounded-lg">
+          <span class="text-zinc-400">Amount</span>
+          <span class="font-bold text-primary text-lg"><%= store.currencySymbol %><%= (order.totalAmount / 100).toFixed(2) %></span>
+        </div>
+      </div>
+
+      <% if (paymentInfo.instructions) { %>
+        <p class="text-zinc-500 text-sm mt-4 p-3 bg-zinc-800/50 rounded-lg"><%= paymentInfo.instructions %></p>
+      <% } %>
+    </div>
+
+    <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 mb-6">
+      <p class="text-yellow-400 text-sm">
+        ⚠️ Please transfer the <strong>exact amount</strong>. Your order will be processed once payment is confirmed by admin.
+      </p>
+    </div>
+
+  <% } else if (paymentInfo.type === 'paypal') { %>
+    <div class="bg-zinc-900 rounded-xl border border-zinc-800 p-6 mb-6 text-center">
+      <p class="text-zinc-400 mb-4">💳 PayPal payment</p>
+      <% if (paymentInfo.approvalUrl) { %>
+        <a href="<%= paymentInfo.approvalUrl %>" class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors">
+          Pay with PayPal
+        </a>
+      <% } else { %>
+        <p class="text-zinc-500"><%= paymentInfo.message || 'PayPal is not configured yet.' %></p>
+      <% } %>
+    </div>
+
+  <% } else if (paymentInfo.type === 'crypto') { %>
+    <div class="bg-zinc-900 rounded-xl border border-zinc-800 p-6 mb-6 text-center">
+      <p class="text-zinc-400 mb-4">₿ Crypto payment</p>
+      <% if (paymentInfo.paymentUrl) { %>
+        <a href="<%= paymentInfo.paymentUrl %>" target="_blank" class="inline-block px-8 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold transition-colors">
+          Pay with Crypto
+        </a>
+      <% } else { %>
+        <p class="text-zinc-500"><%= paymentInfo.message || 'Crypto payments not configured yet.' %></p>
+      <% } %>
+    </div>
+
+  <% } else { %>
+    <div class="bg-zinc-900 rounded-xl border border-zinc-800 p-6 mb-6 text-center">
+      <p class="text-zinc-500">Payment method not available.</p>
+    </div>
+  <% } %>
+
+  <!-- Check Order Status -->
+  <div class="text-center">
+    <a href="/order/<%= order.publicId %>"
+       class="inline-block px-6 py-3 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-sm transition-colors">
+      Check Order Status →
+    </a>
+  </div>
+</div>

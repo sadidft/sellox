@@ -1,0 +1,87 @@
+<div class="max-w-4xl mx-auto">
+  <a href="/" class="text-sm text-zinc-500 hover:text-white mb-6 inline-block">← Back to store</a>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Image -->
+    <div>
+      <% if (product.imageUrl) { %>
+        <div class="aspect-square bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800">
+          <img src="<%= product.imageUrl %>" alt="<%= product.title %>" class="w-full h-full object-cover">
+        </div>
+      <% } else { %>
+        <div class="aspect-square bg-zinc-900 rounded-xl border border-zinc-800 flex items-center justify-center">
+          <span class="text-8xl opacity-20">📦</span>
+        </div>
+      <% } %>
+    </div>
+
+    <!-- Info + Buy -->
+    <div>
+      <h1 class="text-3xl font-bold mb-2"><%= product.title %></h1>
+
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-3xl font-bold text-primary"><%= store.currencySymbol %><%= (product.price / 100).toFixed(2) %></span>
+        <span class="text-sm px-3 py-1 rounded-full
+          <%= stockCount > 0 ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400' %>">
+          <%= stockCount > 0 ? stockCount + ' in stock' : 'Out of stock' %>
+        </span>
+      </div>
+
+      <% if (product.description) { %>
+        <p class="text-zinc-400 mb-6 leading-relaxed"><%= product.description %></p>
+      <% } %>
+
+      <% if (stockCount > 0) { %>
+        <form method="POST" action="/checkout" class="space-y-4">
+          <input type="hidden" name="productId" value="<%= product.id %>">
+
+          <!-- Email -->
+          <div>
+            <label class="text-sm text-zinc-400 block mb-1">Email address</label>
+            <input type="email" name="email" required placeholder="you@email.com"
+              class="w-full px-4 py-3 bg-zinc-900 rounded-lg border border-zinc-800
+                     focus:border-primary focus:outline-none text-white">
+          </div>
+
+          <!-- Quantity -->
+          <div>
+            <label class="text-sm text-zinc-400 block mb-1">Quantity</label>
+            <input type="number" name="quantity" value="1" min="1" max="<%= Math.min(stockCount, 99) %>"
+              class="w-full px-4 py-3 bg-zinc-900 rounded-lg border border-zinc-800
+                     focus:border-primary focus:outline-none text-white">
+          </div>
+
+          <!-- Payment Method -->
+          <div>
+            <label class="text-sm text-zinc-400 block mb-2">Payment method</label>
+            <div class="grid grid-cols-<%= paymentMethods.length %> gap-3">
+              <% paymentMethods.forEach(function(pm, i) { %>
+                <label class="cursor-pointer">
+                  <input type="radio" name="paymentMethod" value="<%= pm.id %>" class="peer hidden"
+                    <%= i === 0 ? 'checked' : '' %>>
+                  <div class="p-4 bg-zinc-900 rounded-lg border border-zinc-800
+                              peer-checked:border-primary peer-checked:bg-primary/5
+                              hover:border-zinc-700 text-center transition-all">
+                    <span class="text-2xl block mb-1"><%= pm.icon %></span>
+                    <span class="text-xs text-zinc-400"><%= pm.label %></span>
+                  </div>
+                </label>
+              <% }) %>
+            </div>
+          </div>
+
+          <button type="submit"
+            class="w-full py-4 bg-primary hover:opacity-90 rounded-lg font-semibold text-lg transition-opacity">
+            Buy Now — <%= store.currencySymbol %><%= (product.price / 100).toFixed(2) %>
+          </button>
+        </form>
+      <% } else { %>
+        <div class="p-6 bg-zinc-900 rounded-lg border border-zinc-800 text-center">
+          <p class="text-zinc-500">This product is currently out of stock.</p>
+        </div>
+      <% } %>
+
+      <p class="text-xs text-zinc-600 mt-4 text-center">🔒 Instant digital delivery after payment</p>
+    </div>
+  </div>
+</div>

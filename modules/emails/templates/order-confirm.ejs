@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <h2>Order Confirmation</h2>
+  <p>Thank you for your order!</p>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr><td style="padding: 8px; color: #888;">Order ID</td><td style="padding: 8px; font-weight: bold;"><%= order.publicId %></td></tr>
+    <tr><td style="padding: 8px; color: #888;">Product</td><td style="padding: 8px;"><%= product.title %></td></tr>
+    <tr><td style="padding: 8px; color: #888;">Amount</td><td style="padding: 8px; font-weight: bold;"><%= currencySymbol %><%= (order.totalAmount / 100).toFixed(2) %></td></tr>
+  </table>
+  <p>We'll notify you once your payment is confirmed.</p>
+  <p style="color: #888; font-size: 12px; margin-top: 30px;">Powered by Sellox</p>
+</body>
+</html>

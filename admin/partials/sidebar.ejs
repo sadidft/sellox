@@ -1,0 +1,43 @@
+<aside class="w-64 bg-zinc-900 border-r border-zinc-800 p-4 flex flex-col min-h-screen shrink-0">
+  <div class="mb-8">
+    <a href="/admin" class="block">
+      <h1 class="text-lg font-bold text-white"><%= store.name %></h1>
+      <p class="text-xs text-zinc-500">Admin Panel</p>
+    </a>
+  </div>
+
+  <nav class="flex-1 space-y-1">
+    <a href="/admin"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors
+              <%= currentPath === '/' ? 'bg-zinc-800 text-primary' : 'hover:bg-zinc-800 text-zinc-300' %>">
+      📊 Dashboard
+    </a>
+
+    <% if (typeof menuItems !== 'undefined') { %>
+      <% menuItems.forEach(function(item) { %>
+        <a href="/admin<%= item.path %>"
+           class="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors
+                  <%= currentPath === item.path ? 'bg-zinc-800 text-primary' : 'hover:bg-zinc-800 text-zinc-300' %>">
+          <%= item.icon %> <%= item.label %>
+          <% if (item.badge) { %>
+            <span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full"><%= item.badge %></span>
+          <% } %>
+        </a>
+      <% }) %>
+    <% } %>
+  </nav>
+
+  <div class="pt-4 border-t border-zinc-800 space-y-1">
+    <a href="/admin/settings" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-800 text-zinc-400">
+      ⚙️ Settings
+    </a>
+    <a href="/" target="_blank" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-800 text-zinc-400">
+      🏪 View Store
+    </a>
+    <form action="/admin/logout" method="POST">
+      <button class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-800 text-zinc-400 w-full text-left">
+        🚪 Logout
+      </button>
+    </form>
+  </div>
+</aside>

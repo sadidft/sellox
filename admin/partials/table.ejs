@@ -1,0 +1,15 @@
+<% /* Generic placeholder – modules render their own tables inline */ %>
+<div class="overflow-x-auto">
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="border-b border-zinc-800 text-zinc-400 text-left">
+        <% columns.forEach(function(col) { %>
+          <th class="py-3 px-4 font-medium"><%= col %></th>
+        <% }) %>
+      </tr>
+    </thead>
+    <tbody>
+      <%- body %>
+    </tbody>
+  </table>
+</div>

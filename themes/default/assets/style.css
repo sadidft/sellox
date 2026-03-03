@@ -1,0 +1,40 @@
+/* Sellox Default Theme — Minimal custom CSS */
+/* Most styling handled by Tailwind CDN */
+
+:root {
+  --color-primary: #8b5cf6;
+}
+
+/* Smooth page transitions */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Line clamp utility (for product descriptions) */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Select all text on click (for credentials) */
+.select-all {
+  user-select: all;
+  cursor: pointer;
+}
+
+/* HTMX loading indicator */
+.htmx-indicator {
+  display: none;
+}
+.htmx-request .htmx-indicator {
+  display: block;
+}

@@ -1,0 +1,8 @@
+<% if (typeof message !== 'undefined' && message) { %>
+  <div id="toast" class="fixed top-4 right-4 z-50 px-4 py-3 rounded-lg text-sm font-medium shadow-lg
+    <%= type === 'error' ? 'bg-red-500/90 text-white' : 'bg-green-500/90 text-white' %>"
+    onclick="this.remove()">
+    <%= message %>
+  </div>
+  <script>setTimeout(() => document.getElementById('toast')?.remove(), 4000)</script>
+<% } %>

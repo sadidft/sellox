@@ -1,0 +1,32 @@
+{
+  "name": "sellox",
+  "version": "1.0.0",
+  "description": "The Modular Digital Store Engine",
+  "license": "AGPL-3.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch core/server.ts",
+    "start": "tsx core/server.ts",
+    "db:push": "drizzle-kit push"
+  },
+  "dependencies": {
+    "hono": "^4.7.0",
+    "@hono/node-server": "^1.13.0",
+    "drizzle-orm": "^0.36.0",
+    "mysql2": "^3.11.0",
+    "ejs": "^3.1.10",
+    "zod": "^3.24.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "nanoid": "^5.0.9"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "tsx": "^4.19.0",
+    "drizzle-kit": "^0.28.0",
+    "@types/ejs": "^3.1.5",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.0.0"
+  }
+}

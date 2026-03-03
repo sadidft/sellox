@@ -1,0 +1,60 @@
+<h2 class="text-2xl font-bold mb-6"><%= isNew ? 'New Product' : 'Edit Product' %></h2>
+
+<div class="max-w-2xl">
+  <form method="POST"
+        action="<%= isNew ? '/admin/products' : '/admin/products/' + product.id + '/update' %>"
+        class="bg-zinc-900 rounded-xl border border-zinc-800 p-6 space-y-4">
+
+    <div>
+      <label class="text-sm text-zinc-400 block mb-1">Title</label>
+      <input type="text" name="title" required
+             value="<%= product ? product.title : '' %>"
+             class="w-full px-4 py-3 bg-zinc-800 rounded-lg border border-zinc-700 focus:border-primary focus:outline-none text-white">
+    </div>
+
+    <div>
+      <label class="text-sm text-zinc-400 block mb-1">Description</label>
+      <textarea name="description" rows="4"
+        class="w-full px-4 py-3 bg-zinc-800 rounded-lg border border-zinc-700 focus:border-primary focus:outline-none text-white"
+      ><%= product ? product.description : '' %></textarea>
+    </div>
+
+    <div>
+      <label class="text-sm text-zinc-400 block mb-1">Price (<%= store.currencySymbol %>)</label>
+      <input type="number" name="price" step="0.01" required min="0"
+             value="<%= product ? (product.price / 100).toFixed(2) : '' %>"
+             class="w-full px-4 py-3 bg-zinc-900 rounded-lg border border-zinc-700 focus:border-primary focus:outline-none text-white">
+    </div>
+
+    <div>
+      <label class="text-sm text-zinc-400 block mb-1">Image URL (optional)</label>
+      <input type="url" name="imageUrl"
+             value="<%= product ? (product.imageUrl || '') : '' %>"
+             class="w-full px-4 py-3 bg-zinc-900 rounded-lg border border-zinc-700 focus:border-primary focus:outline-none text-white">
+    </div>
+
+    <% if (!isNew) { %>
+      <div class="flex items-center gap-3">
+        <input type="checkbox" name="isActive" id="isActive" <%= product.isActive ? 'checked' : '' %>
+               class="w-4 h-4 rounded">
+        <label for="isActive" class="text-sm text-zinc-400">Active</label>
+      </div>
+    <% } %>
+
+    <div class="flex gap-3 pt-4">
+      <button type="submit" class="px-6 py-2 bg-primary rounded-lg text-sm font-medium hover:opacity-90">
+        <%= isNew ? 'Create Product' : 'Save Changes' %>
+      </button>
+      <a href="/admin/products" class="px-6 py-2 bg-zinc-800 rounded-lg text-sm hover:bg-zinc-700">Cancel</a>
+
+      <% if (!isNew) { %>
+        <form method="POST" action="/admin/products/<%= product.id %>/delete" class="ml-auto"
+              onsubmit="return confirm('Delete this product?')">
+          <button type="submit" class="px-4 py-2 bg-red-500/10 text-red-400 rounded-lg text-sm hover:bg-red-500/20">
+            Delete
+          </button>
+        </form>
+      <% } %>
+    </div>
+  </form>
+</div>

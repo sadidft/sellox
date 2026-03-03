@@ -1,0 +1,35 @@
+<div class="min-h-screen flex items-center justify-center -m-8">
+  <div class="w-full max-w-sm">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold"><%= store.name %></h1>
+      <p class="text-zinc-500 mt-1">Admin Login</p>
+    </div>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-3 mb-4 text-red-400 text-sm text-center">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <form method="POST" action="/admin/login" class="space-y-4">
+      <div>
+        <label class="text-sm text-zinc-400 block mb-1">Username</label>
+        <input type="text" name="username" required autofocus
+          class="w-full px-4 py-3 bg-zinc-900 rounded-lg border border-zinc-800
+                 focus:border-primary focus:outline-none text-white">
+      </div>
+      <div>
+        <label class="text-sm text-zinc-400 block mb-1">Password</label>
+        <input type="password" name="password" required
+          class="w-full px-4 py-3 bg-zinc-900 rounded-lg border border-zinc-800
+                 focus:border-primary focus:outline-none text-white">
+      </div>
+      <button type="submit"
+        class="w-full py-3 bg-primary hover:opacity-90 rounded-lg font-semibold transition-opacity">
+        Login
+      </button>
+    </form>
+
+    <p class="text-center text-zinc-600 text-xs mt-8">Powered by Sellox</p>
+  </div>
+</div>

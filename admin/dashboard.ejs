@@ -1,0 +1,30 @@
+<h2 class="text-2xl font-bold mb-6">Dashboard</h2>
+
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+  <% if (typeof stats !== 'undefined') { %>
+    <% stats.forEach(function(stat) { %>
+      <div class="bg-zinc-900 rounded-xl p-5 border border-zinc-800">
+        <div class="flex items-center justify-between">
+          <span class="text-zinc-400 text-sm"><%= stat.label %></span>
+          <span class="text-2xl"><%= stat.icon %></span>
+        </div>
+        <p class="text-3xl font-bold mt-2"><%= stat.value %></p>
+      </div>
+    <% }) %>
+  <% } %>
+</div>
+
+<div class="bg-zinc-900 rounded-xl border border-zinc-800 p-6">
+  <h3 class="text-lg font-semibold mb-4">Quick Actions</h3>
+  <div class="flex flex-wrap gap-3">
+    <a href="/admin/products/new" class="px-4 py-2 bg-primary rounded-lg text-sm hover:opacity-90 transition-opacity">
+      + New Product
+    </a>
+    <a href="/admin/orders" class="px-4 py-2 bg-zinc-800 rounded-lg text-sm hover:bg-zinc-700 transition-colors">
+      View Orders
+    </a>
+    <a href="/admin/pay-manual" class="px-4 py-2 bg-zinc-800 rounded-lg text-sm hover:bg-zinc-700 transition-colors">
+      Pending Payments
+    </a>
+  </div>
+</div>

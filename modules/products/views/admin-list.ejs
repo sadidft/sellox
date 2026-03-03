@@ -1,0 +1,53 @@
+<div class="flex items-center justify-between mb-6">
+  <h2 class="text-2xl font-bold">Products</h2>
+  <a href="/admin/products/new" class="px-4 py-2 bg-primary rounded-lg text-sm hover:opacity-90 transition-opacity">
+    + New Product
+  </a>
+</div>
+
+<div class="bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden">
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="border-b border-zinc-800 text-zinc-400 text-left">
+        <th class="py-3 px-4 font-medium">Product</th>
+        <th class="py-3 px-4 font-medium">Price</th>
+        <th class="py-3 px-4 font-medium">Stock</th>
+        <th class="py-3 px-4 font-medium">Sold</th>
+        <th class="py-3 px-4 font-medium">Status</th>
+        <th class="py-3 px-4 font-medium">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(function(p) { %>
+        <tr class="border-b border-zinc-800/50 hover:bg-zinc-800/30">
+          <td class="py-3 px-4">
+            <div class="font-medium"><%= p.title %></div>
+            <div class="text-zinc-500 text-xs"><%= p.slug %></div>
+          </td>
+          <td class="py-3 px-4"><%= store.currencySymbol %><%= (p.price / 100).toFixed(2) %></td>
+          <td class="py-3 px-4">
+            <span class="<%= p.stockCount > 0 ? 'text-green-400' : 'text-red-400' %>">
+              <%= p.stockCount %>
+            </span>
+          </td>
+          <td class="py-3 px-4"><%= p.totalSold %></td>
+          <td class="py-3 px-4">
+            <span class="px-2 py-1 rounded-full text-xs
+              <%= p.isActive ? 'bg-green-500/10 text-green-400' : 'bg-zinc-700 text-zinc-400' %>">
+              <%= p.isActive ? 'Active' : 'Inactive' %>
+            </span>
+          </td>
+          <td class="py-3 px-4">
+            <div class="flex gap-2">
+              <a href="/admin/stock/<%= p.id %>" class="text-zinc-400 hover:text-white text-xs px-2 py-1 bg-zinc-800 rounded">Stock</a>
+              <a href="/admin/products/<%= p.id %>/edit" class="text-zinc-400 hover:text-white text-xs px-2 py-1 bg-zinc-800 rounded">Edit</a>
+            </div>
+          </td>
+        </tr>
+      <% }) %>
+      <% if (products.length === 0) { %>
+        <tr><td colspan="6" class="py-12 text-center text-zinc-500">No products yet</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

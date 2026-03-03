@@ -1,0 +1,22 @@
+<a href="/product/<%= product.slug %>" class="block bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden hover:border-zinc-700 hover:scale-[1.02] transition-all duration-200">
+  <% if (product.imageUrl) { %>
+    <div class="aspect-video bg-zinc-800 overflow-hidden">
+      <img src="<%= product.imageUrl %>" alt="<%= product.title %>" class="w-full h-full object-cover">
+    </div>
+  <% } else { %>
+    <div class="aspect-video bg-zinc-800 flex items-center justify-center">
+      <span class="text-5xl opacity-30">📦</span>
+    </div>
+  <% } %>
+
+  <div class="p-4">
+    <h3 class="font-semibold text-white mb-1"><%= product.title %></h3>
+    <% if (product.description) { %>
+      <p class="text-zinc-500 text-sm mb-3 line-clamp-2"><%= product.description %></p>
+    <% } %>
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold text-primary"><%= store.currencySymbol %><%= (product.price / 100).toFixed(2) %></span>
+      <span class="text-xs text-zinc-500"><%= product.totalSold %> sold</span>
+    </div>
+  </div>
+</a>
