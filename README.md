@@ -112,13 +112,6 @@ export default {
 
 Drop it in `modules/` → restart → it works.
 
-## Deploy to HuggingFace Spaces
-
-1. Create new Space (Docker SDK)
-2. Add Secrets: `DATABASE_URL`, `JWT_SECRET`, `ADMIN_PASSWORD`
-3. Push code
-4. Done!
-
 ## License
 
 AGPL-3.0 — Free to use, modify, distribute. Must keep open source.
